@@ -30,10 +30,13 @@ export default function RegisterScreen() {
          <MaterialIcons name="arrow-back" size={24} color="#3E322B" />
       </TouchableOpacity>
 
-      <View className="items-center mb-8 mt-10">
-        <Text className="text-4xl font-black text-dark tracking-tight mb-2">Aramıza Katıl</Text>
+      {/* --- DÜZELTİLEN BAŞLIK ALANI --- */}
+      <View className="items-center mb-8 mt-10 w-full px-2">
+        {/* text-4xl -> text-3xl yapıldı ve text-center eklendi */}
+        <Text className="text-3xl font-black text-dark text-center mb-2">Merhaba!</Text>
         <Text className="text-medium text-lg text-center px-4">Zamanını yönetmeye başlamak için hesabını oluştur.</Text>
       </View>
+      {/* ------------------------------- */}
       
       <View className="flex-row items-center bg-surface border-2 border-light rounded-2xl w-full mb-4 px-4 py-4 shadow-sm">
         <MaterialIcons name="mail-outline" size={24} color="#8B7E74" />

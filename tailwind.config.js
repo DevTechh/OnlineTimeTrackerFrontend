@@ -21,14 +21,14 @@ module.exports = {
       borderRadius: {
         '4xl': '32px',
       },
-      // HATA ÇÖZÜMÜ BURADA:
+      // --- BU KISIM HATAYI ÇÖZER ---
       letterSpacing: {
         tighter: -0.5,
         tight: -0.25,
         normal: 0,
         wide: 0.5,
         wider: 1.5,
-        widest: 3.0, // Piksel cinsinden değer
+        widest: 3.0, // Piksel değeri
       }
     },
   },

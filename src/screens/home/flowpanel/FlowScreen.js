@@ -1,7 +1,10 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 export default function FlowScreen() {
+  const router = useRouter(); 
+
   return (
     <View className="flex-1 bg-page justify-center items-center px-8">
       
@@ -21,10 +24,8 @@ export default function FlowScreen() {
       </View>
 
       {/* Başlık ve Açıklama */}
-      {/* DÜZELTME: tracking-tighter güvenli hale geldi */}
       <Text className="text-6xl font-black text-dark tracking-tighter mb-2">FLOW</Text>
       
-      {/* DÜZELTME: tracking-[0.3em] yerine tracking-widest kullanıldı */}
       <Text className="text-medium font-bold uppercase tracking-widest mb-8 text-sm">
         Derin Odak Modu
       </Text>
@@ -35,13 +36,12 @@ export default function FlowScreen() {
         Hazır olduğunda akışa gir.
       </Text>
 
-      {/* Aksiyon Butonu */}
+      {/* Yönlendirme Butonu (Router.push kullanıldı) */}
       <TouchableOpacity 
-        className="bg-dark w-full py-6 rounded-3xl items-center shadow-xl border-b-4 border-medium/30 active:border-b-0 active:translate-y-1"
-        onPress={() => alert("Flow Modu Başlatılıyor...")}
+        className="bg-dark w-3/4 py-4 rounded-3xl items-center shadow-xl border-b-4 border-medium/30 active:border-b-0 active:translate-y-1"
+        onPress={() => router.push('/flow/active')} 
       >
-        {/* DÜZELTME: tracking-widest kullanıldı */}
-        <Text className="text-surface font-black text-xl tracking-widest">AKIŞA GİR</Text>
+        <Text className="text-surface font-black text-lg tracking-widest">AKIŞA GİR</Text>
       </TouchableOpacity>
 
       {/* Alt Bilgi */}
