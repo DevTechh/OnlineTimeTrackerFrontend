@@ -1,21 +1,31 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { useTheme } from '../../src/context/ThemeContext'; // Tema context'i çağırdık
 
 export default function TabLayout() {
+  const { isDark } = useTheme();
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarStyle: { 
-            backgroundColor: '#FFFFFF', // Beyaz arka plan
-            borderTopWidth: 0,
-            elevation: 0, // Android gölgesini kaldır
-            shadowOpacity: 0, // iOS gölgesini kaldır
-            height: 60,
-            paddingBottom: 10
+            // ZEMİN RENGİ: Dark -> Koyu Deri (#342A25), Light -> Krem (#FEF9E7)
+            backgroundColor: isDark ? '#342A25' : '#FEF9E7', 
+            
+            // ÜST ÇİZGİ: Dark -> Koyu Kahve (#4E4039), Light -> Sütlü Kahve (#D4C5B9)
+            borderTopWidth: 1,
+            borderTopColor: isDark ? '#4E4039' : '#D4C5B9',
+            
+            elevation: 0,
+            shadowOpacity: 0,
+            height: 65,
+            paddingBottom: 10,
+            paddingTop: 10,
         },
-        tabBarActiveTintColor: '#D4A373', // Aktif ikon (Toprak rengi)
-        tabBarInactiveTintColor: '#C4C4C4', // Pasif ikon (Açık gri)
+        // İKON RENKLERİ
+        tabBarActiveTintColor: '#D97B56', // Aktif: Yanık Turuncu (Her iki modda aynı)
+        tabBarInactiveTintColor: isDark ? '#9C8F85' : '#8B7E74', // Pasif: Dark -> Soluk Bej, Light -> Gri
         tabBarLabelStyle: { fontSize: 12, fontWeight: '600' }
       }}
     >
@@ -23,28 +33,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Profil',
-          tabBarIcon: ({ color }) => <MaterialIcons name="person" size={26} color={color} />,
+          tabBarIcon: ({ color, focused }) => <MaterialIcons name={focused ? "person" : "person-outline"} size={26} color={color} />,
         }}
       />
       <Tabs.Screen
         name="community"
         options={{
           title: 'Topluluk',
-          tabBarIcon: ({ color }) => <MaterialIcons name="people" size={26} color={color} />,
+          tabBarIcon: ({ color, focused }) => <MaterialIcons name={focused ? "people" : "people-outline"} size={26} color={color} />,
         }}
       />
       <Tabs.Screen
         name="groups"
         options={{
           title: 'Gruplar',
-          tabBarIcon: ({ color }) => <MaterialIcons name="chat-bubble" size={26} color={color} />,
+          tabBarIcon: ({ color, focused }) => <MaterialIcons name={focused ? "chat-bubble" : "chat-bubble-outline"} size={26} color={color} />,
         }}
       />
       <Tabs.Screen
         name="timer"
         options={{
           title: 'Odak',
-          tabBarIcon: ({ color }) => <MaterialIcons name="hourglass-top" size={26} color={color} />,
+          tabBarIcon: ({ color, focused }) => <MaterialIcons name={focused ? "hourglass-full" : "hourglass-empty"} size={26} color={color} />,
         }}
       />
       

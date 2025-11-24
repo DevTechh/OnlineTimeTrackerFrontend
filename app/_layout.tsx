@@ -1,33 +1,47 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ThemeProvider, useTheme } from '../src/context/ThemeContext';
+
+// StatusBar'ı temaya göre ayarlayan yardımcı bileşen
+function ThemedStatusBar() {
+  const { isDark } = useTheme();
+  // Karanlık moddaysa ikonlar beyaz (light), aydınlık moddaysa siyah (dark) olsun
+  return <StatusBar style={isDark ? 'light' : 'dark'} />;
+}
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      {/* Durum çubuğunu koyu yapıyoruz (dark), çünkü arka planımız açık renk (krem).
-         Böylece saat, pil vb. siyah görünür. 
-      */}
-      <StatusBar style="dark" />
-      
-      <Stack screenOptions={{ headerShown: false }}>
-        {/* Giriş ve Kayıt Ekranları */}
-        <Stack.Screen name="index" /> 
-        <Stack.Screen name="auth/login" />
-        <Stack.Screen name="auth/register" />
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <ThemedStatusBar />
         
-        {/* Ana Tab Menüsü */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        
-        {/* Ayarlar Modalı - DÜZELTİLDİ */}
-        <Stack.Screen 
-          name="modal" 
-          options={{ 
-            presentation: 'modal', // Aşağıdan yukarı açılan modal efekti
-            headerShown: false,    // O mor native başlığı tamamen gizledik!
-          }} 
-        />
-      </Stack>
-    </SafeAreaProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          {/* Giriş ve Kayıt Ekranları */}
+          <Stack.Screen name="index" /> 
+          <Stack.Screen name="auth/login" />
+          <Stack.Screen name="auth/register" />
+          
+          {/* Ana Tab Menüsü */}
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          
+          {/* Ayarlar Modalı */}
+          <Stack.Screen 
+            name="modal" 
+            options={{ 
+              presentation: 'modal', 
+              headerShown: false,    
+            }} 
+          />
+          
+          {/* Flow Modu */}
+          <Stack.Screen name="flow/active" options={{ headerShown: false }} />
+          
+          {/* Dinamik Sayfalar (Grup ve Profil Detay) */}
+          <Stack.Screen name="groups/[id]" options={{ headerShown: false }} />
+          <Stack.Screen name="user/[id]" options={{ headerShown: false }} />
+        </Stack>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }
